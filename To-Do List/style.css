@@ -92,35 +92,47 @@ ul{
     align-items: start;
     justify-items: flex-start;
 }
-li{
+li {
     list-style: none;
     cursor: pointer;
     width: 100%;
     display: flex;
     padding: 10px;
-    /* margin: 10px; */
-    align-items:start;
+    align-items: center;
     justify-content: space-between;
     border-radius: 10px;
     position: relative;
 }
 
-li:hover{
-    background-color: #f3f3f3;
-}
-li span{
-    width: 80%;
+li span {
+    flex: 1;
     text-align: left;
     color: #3e3e3e;
 }
-li button{
-    position: absolute;
-    right: 20px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #8512ff;
-    color: rgb(255, 255, 255);
+
+
+li button {
     border: none;
+    padding: 5px 12px;
+    margin-left: 5px;
+    border-radius: 15px;
     cursor: pointer;
+    font-size: 14px;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+
+li .delete-btn {
+    background-color: #ff3b3b;
+}
+li .delete-btn:hover {
+    background-color: #d62828;
+}
+
+li .edit-btn {
+    background-color: #2575fc;
+}
+li .edit-btn:hover {
+    background-color: #1b5ed7;
 }
