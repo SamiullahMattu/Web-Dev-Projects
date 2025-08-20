@@ -9,37 +9,37 @@
 </head>
 
 <body>
-    <div class="body">
-        <div class="header">
-            <h1 class="name">
-                Currency Converter
-            </h1>
-        </div>
-        <div class="main">
-            <input type="text" class="firstCurrency">
-            <div class="currencyContainer">
-                <div class="currency1">
-                    <img id="img1" src="https://flagsapi.com/BE/flat/64.png">
-                    <select name="Currency" id="select1">
-                        <option value="Dinar">Dinar</option>
-                        <option value="Usd">Usd</option>
-                    </select>
-                </div>
-                <div class="currency2">
-                    <img id="img2" src="https://flagsapi.com/NZ/flat/64.png">
-                    <select name="Currency" id="select2">
-                        <option value="Dinar">Dinar</option>
-                        <option value="Usd">Usd</option>
-                    </select>
-                </div>
-            </div>
-            <input type="text" class="">
-            <div class="btn">
-                <button class="convert">Convert</button>
-            </div>
-        </div>
-        <script src="script.js"></script>
+  <div class="body">
+  <div class="name">💱 Currency Converter</div>
+
+  <div class="converter">
+    <div class="input-section">
+      <input type="number" id="amount" placeholder="Enter amount">
     </div>
+
+    <div class="currency-section">
+      <div class="currency-box">
+        <select id="select1"></select>
+        <img id="img1" src="">
+      </div>
+
+      <button id="swapBtn">⇄</button>
+
+      <div class="currency-box">
+        <select id="select2"></select>
+        <img id="img2" src="">
+      </div>
+    </div>
+
+    <button id="convertBtn">Convert</button>
+
+    <div id="rateBox">
+      <p id="rate">Exchange Rate: </p>
+      <p id="converted">Converted Amount: </p>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
 </body>
 
 </html>
