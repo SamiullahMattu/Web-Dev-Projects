@@ -1,52 +1,100 @@
-document.getElementById("addButton").addEventListener("click", function(){
-    if (document.getElementById("todoInput").value === "") {
-        alert("Please enter a todo item.");
-        return; // Exit the function if input is empty
-    }
+const input = document.getElementById("todoInput");
+const todoList = document.getElementById("todoList");
+const addBtn = document.getElementById("addButton");
 
-    let input = document.getElementById("todoInput");
-    let todoList = document.getElementById("todoList");
-    let newTodo = document.createElement("li");
-    newTodo.textContent = input.value;
-    todoList.appendChild(newTodo);
-    input.value = ""; // Clear the input field after adding the todo
-    let deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "x"; 
-        newTodo.appendChild(deleteBtn);
-    deleteBtn.classList.add("delete-btn");
-   saveData(); // Save the updated list to localStorage
-console.log(input.value);})
+addBtn.addEventListener("click", function () {
+  if (input.value.trim() === "") {
+    alert("Please enter a todo item.");
+    return;
+  }
 
-document.getElementById("todoList").addEventListener("click", function(event) {
-    if (event.target.classList.contains("delete-btn")) {
-        event.target.parentElement.remove(); // Remove the li
-           saveData(); // Save the updated list to localStorage
-        return;
-     
-    }
-     if (event.target.tagName === "LI" && event.target.style.textDecoration === "line-through") {
-        event.target.style.textDecoration = "none";
-        event.target.style.color = "black";
-       saveData(); // Save the updated list to localStorage
-        // event.target.syle. = "black";
-    }
-   else if (event.target.tagName === "LI" && event.target.style.textDecoration !== "line-through") {
-        event.target.style.textDecoration = "line-through";
-        event.target.style.color = "red";
-          if (event.target.classList.contains("delete-btn")){
-            document.getElementsByClassName("deleteBtn").style.textDecoration = "none";
-          }
-          saveData(); // Save the updated list to localStorage
-    }
+  createTodo(input.value);
+  input.value = "";
+  saveData();
+});
 
-})
-function saveData(){
-    localStorage.setItem("data", document.getElementById("todoList").innerHTML);
+function createTodo(text) {
+  let newTodo = document.createElement("li");
+
+  // span for text
+  let span = document.createElement("span");
+  span.textContent = text;
+  newTodo.appendChild(span);
+
+  // edit button
+  let editBtn = document.createElement("button");
+  editBtn.textContent = "Edit";
+  editBtn.classList.add("edit-btn");
+  editBtn.addEventListener("click", function () {
+    let newText = prompt("Edit your todo item:", span.textContent);
+    if (newText !== null && newText.trim() !== "") {
+      span.textContent = newText;  // only change the span text
+      saveData();
+    }
+  });
+  newTodo.appendChild(editBtn);
+
+  // delete button
+  let deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "x";
+  deleteBtn.classList.add("delete-btn");
+  deleteBtn.addEventListener("click", function () {
+    newTodo.remove();
+    saveData();
+  });
+  newTodo.appendChild(deleteBtn);
+
+  // mark complete
+  span.addEventListener("click", function () {
+    if (span.style.textDecoration === "line-through") {
+      span.style.textDecoration = "none";
+      span.style.color = "black";
+    } else {
+      span.style.textDecoration = "line-through";
+      span.style.color = "red";
+    }
+    saveData();
+  });
+
+  todoList.appendChild(newTodo);
 }
+
+function saveData() {
+  localStorage.setItem("data", todoList.innerHTML);
+}
+
 function loadData() {
-    let data = localStorage.getItem("data");
-    if (data) {
-        document.getElementById("todoList").innerHTML = data;
-    }
+  let data = localStorage.getItem("data");
+  if (data) {
+    todoList.innerHTML = data;
+
+    // re-bind events after loading
+    todoList.querySelectorAll("li").forEach((li) => {
+      const span = li.querySelector("span");
+      const editBtn = li.querySelector(".edit-btn");
+      const deleteBtn = li.querySelector(".delete-btn");
+
+      span.addEventListener("click", function () {
+        span.style.textDecoration =
+          span.style.textDecoration === "line-through" ? "none" : "line-through";
+        span.style.color = span.style.color === "red" ? "black" : "red";
+        saveData();
+      });
+
+      editBtn.addEventListener("click", function () {
+        let newText = prompt("Edit your todo item:", span.textContent);
+        if (newText !== null && newText.trim() !== "") {
+          span.textContent = newText;
+          saveData();
+        }
+      });
+
+      deleteBtn.addEventListener("click", function () {
+        li.remove();
+        saveData();
+      });
+    });
+  }
 }
+
 loadData();
