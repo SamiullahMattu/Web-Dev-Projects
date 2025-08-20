@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name {
+    font-size: 40px;
+    font-weight: bold;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f9d423;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.images {
+    display: flex;
+    margin-top: 60px;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+}
+
+.rock img, 
+.paper img, 
+.scissors img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.rock img:hover, 
+.paper img:hover, 
+.scissors img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+}
+
+.scores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 150px;
+    margin-top: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+#result-message {
+    margin-top: 20px;
+    padding: 15px 25px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 8px;
+    color: white;
+    display: none; /* hidden by default */
+    text-align: center;
+    min-width: 200px;
+    transition: opacity 0.3s ease;
+}
+
+#result-message.win {
+    background-color: #4CAF50; /* green */
+}
+
+#result-message.lose {
+    background-color: #E53935; /* red */
+}
+
+#result-message.draw {
+    background-color: #FFC107; /* yellow */
+    color: black;
+}
